@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.petcare.web.mapper.ReviewMapper">
+<insert id="insert">
+	insert into review(
+		user_id, review_content, review_rating, hospital_id
+	) values(
+		#{userId}, #{reviewContent}, #{reviewRating}, #{hospitalId}
+	)
+</insert>
+
+<select id="getList" resultType="com.petcare.web.domain.ReviewVo">
+	select review_no, user_id, review_content, review_rating, review_regdate, hospital_id
+	from review
+	where hospital_id = #{hospitalId}
+	order by review_no asc
+	limit #{cri.pageStart}, #{cri.amount}
+</select>
+
+<select id="getCountByHospitalId" resultType="int">
+    	select count(*) from review where hospital_id = #{hospitalId}
+</select>
+
+<delete id="delete">
+		delete from review where review_no = #{reviewNo}
+</delete>
+</mapper>

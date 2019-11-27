@@ -7,5 +7,19 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
-
+	<typeAliases>
+		<!-- 회원  -->
+		<typeAlias alias="MemberVO" type="com.petcare.web.domain.MemberVO"/>
+		<typeAlias alias="UserVO" type="com.petcare.web.domain.UserVO"/>
+		<!-- 병원 -->
+		<typeAlias alias="HospitalVO" type="com.petcare.web.domain.HospitalVO"/>
+		<!-- 예약 -->
+		<typeAlias alias="ReservVO" type="com.petcare.web.domain.ReservVO"/>
+		<!-- 동물VO -->
+		<typeAlias alias="PetVO" type="com.petcare.web.domain.PetVO"/>
+		<!-- 병원VO -->
+		<typeAlias alias="Hospital" type="com.petcare.web.domain.Hospital"/>
+		<!-- 특성 -->
+		<typeAlias alias="Character" type="com.petcare.web.domain.Character"/>
+	</typeAliases>
 </configuration>

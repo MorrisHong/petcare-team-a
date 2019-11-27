@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.petcare.web.mapper.ReservMapper">
+   
+    <select id="getTime" resultType="java.lang.String">
+        select now()
+    </select>
+    
+    <insert id="reservationForm" parameterType="ReservVO" >
+    	insert into appointment(
+			pet_no
+			,user_id
+			,hospital_id
+			,appt_date
+			,appt_time
+			,appt_note)
+			value(
+			#{petNo}
+			,#{userId}
+			,#{hospitalId}
+			,#{apptDate}
+			,#{apptTime}
+			,#{apptNote}
+			)
+    </insert>
+    
+    <select id="getPets" parameterType="String" resultType="java.util.HashMap">
+    	select pet_no, pet_name from pet 
+    	where user_id = #{userId}
+    </select>
+    
+</mapper>

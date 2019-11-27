@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+/* 회원가입 타이틀 */
+.page-title { 
+	height: 205px; 
+	margin-bottom: 60px; 
+	box-sizing: border-box; 
+	text-align: center;
+}
+.page-title div { padding: 56px 0; }
+.page-title strong { font-size: 2.286rem; letter-spacing: -1px; }
+.page-title p { margin-top: 15px; font-size: 1.071rem; }
+
+label.error { color: red; }
+
+.classWithPad { margin:20px; padding:30px; }

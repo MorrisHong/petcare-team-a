@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.petcare.web.mapper.MemberMapper">
+	<insert id="register" parameterType="UserVO">
+		INSERT INTO USER(user_id
+										, user_pw
+										, user_name
+										, user_address
+										, user_phone
+										, user_email
+										, user_lastlogin
+										, user_authority
+										)
+					VALUES (#{userId}
+										, #{userPw}
+										, #{userName}
+										, #{userAddress}
+										, #{userPhone}
+										, #{userEmail}
+										, NOW()
+										, 'USER'
+										)
+	</insert>
+		
+	<select id="getUser" resultType="UserVO">
+		SELECT *
+		FROM USER
+		WHERE user_id = #{userId}
+	</select>
+	
+	<select id="getEmail" resultType="UserVO">
+		SELECT *
+		FROM USER
+		WHERE user_email = #{userEmail}
+	</select>
+	
+	<select id="loginPro" resultType="UserVO">
+		SELECT *
+		FROM USER
+		WHERE user_id = #{userId}
+		AND user_pw = #{userPw}
+	</select>
+</mapper>

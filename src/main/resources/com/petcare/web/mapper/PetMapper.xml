@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.petcare.web.mapper.PetMapper">
+    <insert id="insert">
+    
+    	<selectKey resultType="int" keyProperty="petNo" order="BEFORE">
+    		select ifnull(max(pet_no), 0) + 1 from pet
+    	</selectKey>
+    	insert into pet(pet_name, pet_gender, pet_neuter, pet_weight, pet_species, pet_breed, pet_age, pet_photo, user_id)
+    		values
+    	(#{petName}, #{petGender}, #{petNeuter}, #{petWeight}, #{petSpecies}, #{petBreed}, #{petAge}, #{petPhoto}, #{userId})
+    </insert>
+    
+    <select id="getList" resultType="com.petcare.web.domain.PetVO">
+    	select * from pet
+    </select>
+    
+    <delete id="delete">
+    	delete from pet where pet_no = #{petNo}
+    </delete>
+    
+    <update id="update">
+    	update pet
+    	set pet_name=#{petName},
+    	pet_gender=#{petGender},
+    	pet_neuter=#{petNeuter},
+    	pet_weight=#{petWeight},
+    	pet_species=#{petSpecies},
+    	pet_breed=#{petBreed},
+    	pet_age=#{petAge},
+    	pet_photo=#{petPhoto}
+    	where pet_no = #{petNo}
+    </update>
+    
+    <select id="read" resultType="com.petcare.web.domain.PetVO">
+    	select  p.pet_no, p.pet_name, p.pet_gender, p.pet_neuter, p.pet_weight, p.pet_species, p.pet_breed, p.pet_age, p.pet_regdate, p.user_id, t.treat_regdate
+		from pet p
+		left outer join treatment t on p.pet_no = t.pet_no
+    	where p.pet_no = #{petNo}
+    </select>
+    
+    <select id="getListWithPaging" resultType="com.petcare.web.domain.PetVO">
+		select  p.pet_no, p.pet_name, p.pet_gender, p.pet_neuter, p.pet_weight, p.pet_species, p.pet_breed, p.pet_age, p.pet_regdate, p.user_id, t.treat_regdate
+		from pet p
+		left outer join treatment t on p.pet_no = t.pet_no
+		order by p.pet_no asc
+    	limit #{pageStart}, #{amount}
+    </select>
+    
+    <select id="getTotalCount" resultType="int">
+    	select count(*) from pet where pet_no > 0
+    </select>
+</mapper>
